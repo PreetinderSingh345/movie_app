@@ -6,3 +6,21 @@ body {
   font-family: sans-serif;
 
 }
+
+/* movie image container */
+
+.movie-img-container{
+
+  height: 200px;
+  width: 135px;
+  
+}
+
+/* image present inside the above container */
+
+.movie-img-container img{
+
+  height: inherit;
+  width: inherit;
+
+}
