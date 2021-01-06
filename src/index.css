@@ -4,6 +4,33 @@ body {
 
   margin: 0;
   font-family: sans-serif;
+  overflow: hidden;
+
+}
+
+/* list */
+
+#list{
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  overflow-y: auto;
+  max-height: 516px;
+
+}
+
+/* movie card */
+
+.movie-card{
+
+  display: flex;
+  flex-direction: row;    
+  justify-content: space-between;
+  width: 70%;
+  border-radius: 20px;
+  margin: 20px;
+  background-color: rgb(90, 107, 107);  
 
 }
 
@@ -13,6 +40,8 @@ body {
 
   height: 200px;
   width: 135px;
+  border-radius: 10px;
+  margin: 10px;  
   
 }
 
@@ -22,5 +51,112 @@ body {
 
   height: inherit;
   width: inherit;
+  border-radius: inherit;
 
+}
+
+/* movie description container */
+
+.movie-description-container{
+
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: darkslategrey;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: rgb(250, 250, 250);
+  margin: 10px;  
+  box-sizing: border-box;
+
+}
+
+/* movie title */
+
+.movie-title{
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-left: 10px;
+
+}
+
+/* movie genre */
+
+.movie-genre{
+
+  font-size: 0.9rem;
+  padding-left: 20px;
+  color: grey;
+
+}
+
+/* movie production */
+
+.movie-production{
+
+  font-size: 0.8rem;
+  padding-left: 20px;
+  color: grey;
+
+}
+
+/* movie description */
+
+.movie-description{
+
+  text-align: justify;
+  padding: 0 10px;
+  color: rgb(46, 46, 46);
+
+}
+
+/* movie rating favourites */
+
+.movie-rating-favourites{
+
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+/* movie rating */
+
+.movie-rating{
+  font-weight: bold;  
+}
+
+/* favourites button */
+
+.favourites-button{
+
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background-color: rgb(96, 195, 235);
+  color: whitesmoke;
+
+}
+
+/* scrollbar */
+
+::-webkit-scrollbar{
+
+  height: 8px;
+  width: 8px;
+
+}
+
+::-webkit-scrollbar-track{
+  background-color: lightgrey;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: grey;
 }
