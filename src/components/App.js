@@ -1,9 +1,11 @@
-// importing React, movies data, Navbar and MovieCard component
+// importing React, Navbar, MovieCard component, movies data and addMovies function
 
 import React from "react";
-import {data} from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
+
+import {data} from "../data";
+import {addMovies} from "../actions/index";
 
 // defining and exporting the App class
 
@@ -23,14 +25,9 @@ class App extends React.Component {
       this.forceUpdate();
     });
 
-    // dispatching an action to change the state(add movies) inisde the store
+    // dispatching an action to change the state inisde the store(the action object is returned via the addMovies function we're calling(for the movies data))
 
-    store.dispatch({
-
-      type: "ADD_MOVIES",
-      movies: data
-
-    });
+    store.dispatch(addMovies(data));
 
   }
 

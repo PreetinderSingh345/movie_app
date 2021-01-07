@@ -1,13 +1,14 @@
-// different actions
+// defining and exporting the action types(used for comparison inside the reducer function)
 
-{
-    type: "ADD_MOVIES"
-}
+export const ADD_MOVIES="ADD_MOVIES";
 
-{
-    type: "INCREASE_COUNT"
-}
+// defining and exporting the action creator(returns the action object used as dispatch argument)
 
-{
-    type: "DECREASE_COUNT"
+export const addMovies=function(data){
+    return {
+
+        type: ADD_MOVIES,
+        movies: data
+
+    }
 }
