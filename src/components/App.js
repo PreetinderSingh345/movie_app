@@ -1,48 +1,85 @@
-// importing React, data, Navbar and MovieCard component
+// importing React, movies data, Navbar and MovieCard component
 
 import React from "react";
 import {data} from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
 
-// defining and exporting the app function, containing the navbar and the main-container inside the App component
+// defining and exporting the App class
 
-function App() {
-  return (
-    <div className="App">
-     
-      <Navbar />
+class App extends React.Component {
 
-      <div id="main-container">
+  // component did mount function, to change the state(add movies) inside the store
+  
+  componentDidMount(){
 
-        <div id="tab-container">
-          
-          <div className="tabs" id="music-tab">Music</div>
-          <div className="tabs" id="favourites-tab">Favourites</div>
+    // getting the store from the props
 
-        </div>
+    const {store}=this.props;
 
-        <div id="list">
+    // subscribing to the store and re-rendering the component inside its callback
 
-          {data.map((movie)=>{
+    store.subscribe(()=>{      
+      this.forceUpdate();
+    });
 
-            return (
-              <MovieCard
+    // dispatching an action to change the state(add movies) inisde the store
 
-                movie={movie}
-                key={movie.imdbID}
+    store.dispatch({
 
-              />
-            );
+      type: "ADD_MOVIES",
+      movies: data
 
-          })}
+    });
 
-        </div>
+  }
 
-      </div>      
+  render(){
 
-    </div>
-  );
+    // getting the state array containing the movies from the props
+
+    const movies=this.props.store.getState();
+
+    // returning the App component containing the Navbar component and the main container element
+
+    return (
+      <div className="App">
+       
+        <Navbar />
+  
+        <div id="main-container">
+  
+          <div id="tab-container">
+            
+            <div className="tabs" id="music-tab">Music</div>
+            <div className="tabs" id="favourites-tab">Favourites</div>
+  
+          </div>
+  
+          <div id="list">
+  
+            {movies.map((movie)=>{
+  
+              return (
+                <MovieCard
+  
+                  movie={movie}
+                  key={movie.imdbID}
+  
+                />
+              );
+  
+            })}
+  
+          </div>
+  
+        </div>      
+  
+      </div>
+    );
+
+  }
+
 }
 
 export default App;
