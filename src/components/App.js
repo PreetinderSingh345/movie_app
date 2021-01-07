@@ -33,9 +33,9 @@ class App extends React.Component {
 
   render(){
 
-    // getting the state array containing the movies from the props
+    // getting the list array containing the movies from the state object via props
 
-    const movies=this.props.store.getState();
+    const {list}=this.props.store.getState();
 
     // returning the App component containing the Navbar component and the main container element
 
@@ -55,7 +55,7 @@ class App extends React.Component {
   
           <div id="list">
   
-            {movies.map((movie)=>{
+            {list.map((movie)=>{
   
               return (
                 <MovieCard
