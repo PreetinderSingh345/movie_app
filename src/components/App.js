@@ -5,7 +5,7 @@ import {data} from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
 
-// defining and exporting the app function, containing the 
+// defining and exporting the app function, containing the navbar and the main-container inside the App component
 
 function App() {
   return (
@@ -15,8 +15,12 @@ function App() {
 
       <div id="main-container">
 
-        <div className="tabs" id="music-tab">Music</div>
-        <div className="tabs" id="favourites-tab">Favourites</div>
+        <div id="tab-container">
+          
+          <div className="tabs" id="music-tab">Music</div>
+          <div className="tabs" id="favourites-tab">Favourites</div>
+
+        </div>
 
         <div id="list">
 

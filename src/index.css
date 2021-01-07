@@ -5,19 +5,130 @@ body {
   margin: 0;
   font-family: sans-serif;
   overflow: hidden;
+  min-width: 315px;
+  overflow-x: auto;
+
+}
+
+/* navbar */
+
+#navbar{
+
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+
+}
+
+/* search container */
+
+#search-container{
+
+  width: 70%;
+  display: flex;
+  flex-direction: row;  
+
+}
+
+/* search input */
+
+#search-input{
+
+  height: 30px;
+  width: 70%;
+  border: none;
+  margin: 0;
+  padding: 5px 10px;
+  box-sizing: border-box;  
+  border-radius: 15px 0 0 15px;
+
+}
+
+/* search button */
+
+#search-button{
+
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;  
+  width: 30%;
+  background-color: darkslategrey;
+  color: whitesmoke;   
+  letter-spacing: 2px;
+  border-radius: 0 15px 15px 0;
+
+}
+
+/* search icon */
+
+#search-icon{
+
+  display: none;
+  font-size: 1.2rem;
+
+}
+
+/* main container */
+
+#main-container{
+ 
+  height: 90vh;
+  background-image: linear-gradient(to top right , whitesmoke, rgb(255, 226, 175), whitesmoke);
+
+}
+
+/* tab container */
+
+#tab-container{ 
+
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  box-sizing: border-box;
+
+}
+
+/* tabs */
+
+.tabs{
+
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: darkslategrey;
+  color: whitesmoke;
+  border-radius: 20px;
+  min-width: 120px;
 
 }
 
 /* list */
 
 #list{
-  
+    
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;  
-  overflow-y: auto;
-  max-height: 516px;
+  overflow-y: auto;    
+  max-height: 80vh;
 
+}
+
+#list::-webkit-scrollbar-track{
+  margin-top: 20px;
 }
 
 /* movie card */
@@ -27,10 +138,21 @@ body {
   display: flex;
   flex-direction: row;    
   justify-content: space-between;
+  align-items: center;
   width: 70%;
   border-radius: 20px;
   margin: 20px;
-  background-color: rgb(90, 107, 107);  
+  background-color: rgb(90, 107, 107);    
+
+}
+
+/* adjusting the movie card, according to the screen width */
+
+@media only screen and (max-width: 600px){
+
+  body .movie-card{
+    width: 90%;
+  }
 
 }
 
@@ -55,6 +177,16 @@ body {
 
 }
 
+/* movie icon button */
+
+.movie-icon-button{
+
+  display: none;
+  font-size: 1.5rem;
+  color: rgb(96, 195, 235);
+
+}
+
 /* movie description container */
 
 .movie-description-container{
@@ -62,14 +194,20 @@ body {
   width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   color: darkslategrey;
   padding: 5px;
   border-radius: 10px;
   background-color: rgb(250, 250, 250);
   margin: 10px;  
   box-sizing: border-box;
+  height: 200px;
 
+}
+
+/* movie title genre production container */
+
+.movie-title-genre-production{
+  height: 40%;
 }
 
 /* movie title */
@@ -98,7 +236,7 @@ body {
 
   font-size: 0.8rem;
   padding-left: 20px;
-  color: grey;
+  color: grey;  
 
 }
 
@@ -109,7 +247,29 @@ body {
   text-align: justify;
   padding: 0 10px;
   color: rgb(46, 46, 46);
+  max-height: 75px;
+  overflow-y: auto;
+  height: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 
+}
+
+.movie-description::-webkit-scrollbar{
+
+  height: 4px;
+  width: 4px;  
+
+}
+
+.movie-description::-webkit-scrollbar-track{
+  border-radius: 2px;
+}
+
+.movie-description::-webkit-scrollbar-thumb{
+  border-radius: 2px;
 }
 
 /* movie rating favourites */
@@ -141,6 +301,92 @@ body {
   outline: none;
   background-color: rgb(96, 195, 235);
   color: whitesmoke;
+
+}
+
+/* favourites icon button */
+
+.favourites-icon-button{
+
+  display: none;
+  color: rgb(96, 195, 235);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background-color: rgb(230, 230, 230);
+
+}
+
+/* adjusting the content of movie card, according to the device width */
+
+@media only screen and (max-width: 500px){
+
+  body .favourites-icon-button{
+    display: inline-block;
+  }
+
+  body .favourites-button{
+    display: none;
+  }
+
+  body .movie-card{
+    position: relative;
+  }
+
+  body .movie-img-container{
+    
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    height: 80px;
+    width: 54px;
+    margin: 0;
+
+  }
+
+  body .movie-description-container{
+    width: 100%;
+  }
+
+  body .movie-description{
+
+    padding: 5px;
+    box-sizing: border-box;
+
+  }
+
+  .movie-description::-webkit-scrollbar-track{
+    margin-top: 5px;
+  }
+  
+}
+
+/* adjusting the content of movie card, according to the device width */
+
+@media only screen and (max-width: 360px){
+
+  body .movie-img{
+    display: none;
+  }
+
+  body .movie-icon-button{
+
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+  }
+
+  body #search-icon{
+    display: inline-block;
+  }
+
+  body #search-content{
+    display: none;
+  }
 
 }
 
