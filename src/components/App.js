@@ -11,6 +11,18 @@ import {addMovies} from "../actions/index";
 
 class App extends React.Component {
 
+  // defining the constructor function
+
+  constructor(){
+
+    super();
+
+    this.state={
+      showFavourite: false
+    };
+
+  }
+
   // component did mount function, to change the state(add movies) inside the store
   
   componentDidMount(){
@@ -30,12 +42,25 @@ class App extends React.Component {
     store.dispatch(addMovies(data));
 
   }
+  
+  showFavUnfav=(showFav)=>{
+
+    this.setState({
+      showFavourite: showFav
+    });
+
+  }
 
   render(){
     
     // getting the list array containing the movies from the state object via props
+    
+    let {list}=this.props.store.getState();
+    let {favourites}=this.props.store.getState();
 
-    const {list}=this.props.store.getState();
+    if(this.state.showFavourite){
+      list=favourites;
+    }
 
     // returning the App component containing the Navbar component and the main container element
 
@@ -48,15 +73,15 @@ class App extends React.Component {
   
           <div id="tab-container">
             
-            <div className="tabs" id="music-tab">Music</div>
-            <div className="tabs" id="favourites-tab">Favourites</div>
+            <div className="tabs" id="music-tab" onClick={()=>this.showFavUnfav(false)}>Music</div>
+            <div className="tabs" id="favourites-tab" onClick={()=>this.showFavUnfav(true)}>Favourites</div>
   
           </div>
   
           <div id="list">
   
             {list.map((movie)=>{
-  
+            
               return (
                 <MovieCard
   

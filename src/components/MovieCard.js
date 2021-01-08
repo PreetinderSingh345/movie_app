@@ -87,11 +87,11 @@ class MovieCard extends React.Component{
 
         const {movie, store}=this.props;
 
-        // subscribing to the store to listen to the changes(force updating inside it to cause a re-render) in the state after an action to add/remove a movie as favourite is dispatched below
+        // subscribing to the store to listen to the changes(force updating inside it to cause a re-render) in the state after an action to add/remove a movie as favourite is dispatched below        
 
-        store.subscribe(()=>{
+        const unsubscribe=store.subscribe(()=>{
             this.forceUpdate();
-        });
+        });                
 
         // adding/removing the movie to/from the favourites according to the count value
 
@@ -100,9 +100,11 @@ class MovieCard extends React.Component{
         }
         else{
             store.dispatch(removeFavourite(movie));
-        }        
+        }          
 
-        // incrementing count
+        // unsubscribing to the store to listen to the changes in the state as we're going to subscribe again when this event listener is called again
+
+        unsubscribe();        
 
         this.countFav++;
 
