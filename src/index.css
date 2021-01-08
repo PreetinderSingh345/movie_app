@@ -320,12 +320,11 @@ body {
 
 }
 
-/* favourites icon button */
+/* favourite or unfavourite icon button */
 
-.favourites-icon-button{
+.fav-unfav-icon-button{
 
   display: none;
-  color: rgb(96, 195, 235);
   height: 30px;
   width: 30px;
   border-radius: 50%;
@@ -335,11 +334,21 @@ body {
 
 }
 
+/* favourites icon button */
+
+.favourites-icon-button{  
+  color: rgb(96, 195, 235);  
+}
+
+.unfavourite-icon-button{
+  color: rgb(255, 100, 100);
+}
+
 /* adjusting the content of movie card, according to the device width */
 
 @media only screen and (max-width: 500px){
 
-  body .favourites-icon-button{
+  body .fav-unfav-icon-button{
     display: inline-block;
   }
 

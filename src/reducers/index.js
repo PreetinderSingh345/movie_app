@@ -1,6 +1,6 @@
-// importing the ADD_MOVIES action type
+// importing the ADD_MOVIES and ADD_FAVOURITE action type
 
-import {ADD_MOVIES} from "../actions/index";
+import {ADD_MOVIES, ADD_FAVOURITE} from "../actions/index";
 
 // defining the initial movie state object(consisting of a list and a favourites array)
 
@@ -15,19 +15,33 @@ const initialMovieState={
 
 export default function movies(state=initialMovieState, action){
 
-    // matching the action type and returning the new state
+    // matching the action type and returning the new state(we return the previous state as the default case)
 
-    if(action.type==ADD_MOVIES){
-        return {
+    switch(action.type){
 
-            ... state,
-            list: action.movies
-           
-        }
+        // updating the list of movies with those coming from the action
+
+        case ADD_MOVIES:
+            return {
+
+                ...state,
+                list: action.movies
+
+            }
+
+        // adding the selected favourite movie to the front of the favourites array of the state
+        
+        case ADD_FAVOURITE:
+            return {
+
+                ...state,
+                favourites: [action.movie, ...state.favourites]
+
+            }
+
+        default: 
+            return state;
+
     }
-
-    // we return the previous state, if the action type does not match with any of the above compared values
-
-    return state;
 
 }

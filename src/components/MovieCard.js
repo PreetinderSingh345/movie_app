@@ -1,20 +1,23 @@
-// importing React and fontawesome icons
+// importing React, addFavourite function and fontawesome icons
 
 import React from "react";
+import {addFavourite} from "../actions/index";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faHeartBroken, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 // defining and exporting the MovieCard class
 
 class MovieCard extends React.Component{
 
-    // defining the constructor function and a countIcon variable inside it(number of times the show image icon has been clicked)
+    // defining the constructor function with countIcon and countFav variables inside it(number of times the show image icon and favourite/unfavourite button has been clicked respectively)
 
     constructor(){
 
         super();
+
         this.countIcon=0;
+        this.countFav=0;
 
     }
 
@@ -53,6 +56,47 @@ class MovieCard extends React.Component{
         // incrementing count
 
         this.countIcon++;
+
+    }
+
+    // handle fav unfav click function to handle the clicking of the favourite or unfavourite button
+
+    handleFavUnfavClick=(imdbID)=>{
+        
+        // getting the favourite button
+
+        let favouriteButton=document.getElementById(`favourites-button-${imdbID}`);    
+
+        // changing the button content and style if the the count is even and undoing the changes when the count is odd
+
+        if(this.countFav%2==0){
+
+            favouriteButton.innerText="Unfavourite";        
+            favouriteButton.style.backgroundColor="rgb(255, 100, 100)";
+            
+        }
+        else{
+
+            favouriteButton.innerText="Add to favourites";
+            favouriteButton.removeAttribute("style");
+
+        }
+
+        // incrementing count
+
+        this.countFav++;
+
+        // getting the movie and the store from props
+
+        const {movie, store}=this.props;
+
+        // subscribing to the store to listen to the changes(force updating inside it to cause a re-render) in the state after an action to add a movie as favourite is dispatched below
+
+        store.subscribe(()=>{
+            this.forceUpdate();
+        });
+
+        store.dispatch(addFavourite(movie));
 
     }
 
@@ -97,8 +141,21 @@ class MovieCard extends React.Component{
                     <div className="movie-rating-favourites">
 
                         <div className="movie-rating">IMDB {movie.imdbRating}</div>
-                        <button className="favourites-button">Add to favourites</button>
-                        <button className="favourites-icon-button"><FontAwesomeIcon icon={faHeart}/></button>
+
+                        <button className="favourites-button" onClick={this.handleFavUnfavClick} id={`favourites-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}>Add to favourites</button>
+
+                        {/* showing the relevant button according to countFav value */}
+
+                        { this.countFav%2==0? 
+                        
+                            <button className="favourites-icon-button fav-unfav-icon-button" onClick={this.handleFavUnfavClick} id={`favourites-icon-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}><FontAwesomeIcon icon={faHeart}/></button>
+
+                        : 
+                        
+                            <button className="unfavourite-icon-button fav-unfav-icon-button" id={`unfavourite-icon-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}><FontAwesomeIcon icon={faHeartBroken}/></button>
+                        
+                        }                                                
+                                                
 
                     </div>
 

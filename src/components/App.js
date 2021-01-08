@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   render(){
-
+    
     // getting the list array containing the movies from the state object via props
 
     const {list}=this.props.store.getState();
@@ -62,6 +62,7 @@ class App extends React.Component {
   
                   movie={movie}
                   key={movie.imdbID}
+                  store={this.props.store}
   
                 />
               );
