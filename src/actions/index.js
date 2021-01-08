@@ -2,6 +2,7 @@
 
 export const ADD_MOVIES="ADD_MOVIES";
 export const ADD_FAVOURITE="ADD_FAVOURITE";
+export const REMOVE_FAVOURITE="REMOVE_FAVOURITE";  
 
 // defining and exporting the action creators(return the action object used as dispatch argument)
 
@@ -18,6 +19,15 @@ export const addFavourite=function(movie){
     return {
 
         type: ADD_FAVOURITE,
+        movie: movie
+
+    }
+}
+
+export const removeFavourite=function(movie){
+    return {
+
+        type: REMOVE_FAVOURITE,
         movie: movie
 
     }

@@ -1,6 +1,6 @@
-// importing the ADD_MOVIES and ADD_FAVOURITE action type
+// importing the ADD_MOVIES ,ADD_FAVOURITE, REMOVE_FAVOURITE action type
 
-import {ADD_MOVIES, ADD_FAVOURITE} from "../actions/index";
+import {ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE} from "../actions/index";
 
 // defining the initial movie state object(consisting of a list and a favourites array)
 
@@ -36,6 +36,35 @@ export default function movies(state=initialMovieState, action){
 
                 ...state,
                 favourites: [action.movie, ...state.favourites]
+
+            }
+
+        // removing the selected movie from the favourites array of the state
+
+        case REMOVE_FAVOURITE: 
+
+            // getting the favourites array of the state and the movie to be removed from the array
+
+            let favourites=state.favourites;
+            let movie=action.movie;
+
+            // removing the movie from the favourites array
+
+            for(let i=0;i<favourites.length;i++){
+                if(favourites[i]==movie){
+                    
+                    favourites.splice(i, 1);                                    
+                    break;
+
+                }
+            }
+
+            // returning the new state
+            
+            return {
+
+                ...state,
+                favourites: favourites
 
             }
 

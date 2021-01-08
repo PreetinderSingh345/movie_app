@@ -1,7 +1,8 @@
-// importing React, addFavourite function and fontawesome icons
+// importing React, addFavourite, removeFavourite function and fontawesome icons
 
 import React from "react";
 import {addFavourite} from "../actions/index";
+import {removeFavourite} from "../actions/index";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartBroken, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -80,23 +81,30 @@ class MovieCard extends React.Component{
             favouriteButton.innerText="Add to favourites";
             favouriteButton.removeAttribute("style");
 
-        }
-
-        // incrementing count
-
-        this.countFav++;
+        }        
 
         // getting the movie and the store from props
 
         const {movie, store}=this.props;
 
-        // subscribing to the store to listen to the changes(force updating inside it to cause a re-render) in the state after an action to add a movie as favourite is dispatched below
+        // subscribing to the store to listen to the changes(force updating inside it to cause a re-render) in the state after an action to add/remove a movie as favourite is dispatched below
 
         store.subscribe(()=>{
             this.forceUpdate();
         });
 
-        store.dispatch(addFavourite(movie));
+        // adding/removing the movie to/from the favourites according to the count value
+
+        if(this.countFav%2==0){
+            store.dispatch(addFavourite(movie));
+        }
+        else{
+            store.dispatch(removeFavourite(movie));
+        }        
+
+        // incrementing count
+
+        this.countFav++;
 
     }
 
