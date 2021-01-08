@@ -102,7 +102,7 @@ class MovieCard extends React.Component{
             store.dispatch(removeFavourite(movie));
         }          
 
-        // unsubscribing to the store to listen to the changes in the state as we're going to subscribe again when this event listener is called again
+        // unsubscribing to the store to listen to the changes in the state as we're going to subscribe again when this event listener is called again(so that unmounted components are not updated)
 
         unsubscribe();        
 

@@ -79,6 +79,12 @@ class App extends React.Component {
           </div>
   
           <div id="list">
+
+            {list.length==0 && 
+              <div id="no-favourites">
+                  <span>No favourites</span>
+              </div>
+            }
   
             {list.map((movie)=>{
             
@@ -92,7 +98,7 @@ class App extends React.Component {
                 />
               );
   
-            })}
+            })}            
   
           </div>
   
