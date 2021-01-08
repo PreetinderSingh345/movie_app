@@ -1,13 +1,14 @@
-// importing the ADD_MOVIES ,ADD_FAVOURITE, REMOVE_FAVOURITE action type
+// importing the ADD_MOVIES ,ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITES action types
 
-import {ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE} from "../actions/index";
+import {ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITES} from "../actions/index";
 
-// defining the initial movie state object(consisting of a list and a favourites array)
+// defining the initial movie state object(consisting of a list and favourites array and showFavourites value)
 
 const initialMovieState={
 
     list: [],
-    favourites: []
+    favourites: [],
+    showFavourites: false
 
 }
 
@@ -65,6 +66,17 @@ export default function movies(state=initialMovieState, action){
 
                 ...state,
                 favourites: favourites
+
+            }
+
+        // changing the show favourites value according to the tab selected
+
+        case SET_SHOW_FAVOURITES:
+
+            return {
+
+                ...state,
+                showFavourites: action.showFavourites
 
             }
 

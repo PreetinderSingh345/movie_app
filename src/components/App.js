@@ -1,4 +1,4 @@
-// importing React, Navbar, MovieCard component, movies data and addMovies function
+// importing React, Navbar, MovieCard component, movies data, addMovies and setShowFavourites function
 
 import React from "react";
 import Navbar from "./Navbar";
@@ -6,22 +6,11 @@ import MovieCard from "./MovieCard";
 
 import {data} from "../data";
 import {addMovies} from "../actions/index";
+import {setShowFavourites} from "../actions/index";
 
 // defining and exporting the App class
 
 class App extends React.Component {
-
-  // defining the constructor function
-
-  constructor(){
-
-    super();
-
-    this.state={
-      showFavourite: false
-    };
-
-  }
 
   // component did mount function, to change the state(add movies) inside the store
   
@@ -43,24 +32,33 @@ class App extends React.Component {
 
   }
   
-  showFavUnfav=(showFav)=>{
+  // show fav unfav function which handles which tab to show according to the tab i.e. is clicked
 
-    this.setState({
-      showFavourite: showFav
+  showFavUnfav=(showFavourites)=>{
+
+    // getting the store(from props) and subscribing to the store(force updating inside it to re-render the component)
+
+    const {store}=this.props;
+
+    const unsubscribe=store.subscribe(()=>{
+      this.forceUpdate();
     });
+
+    // dispatching an action according to the showFavourites value and unsubscribing as we'll subscribe to the store again when this event listener is called again
+
+    store.dispatch(setShowFavourites(showFavourites));
+
+    unsubscribe();
 
   }
 
   render(){
     
-    // getting the list array containing the movies from the state object via props
+    // getting the needed values from the state(via props) and setting which movies to show according to the tab selected
     
-    let {list}=this.props.store.getState();
-    let {favourites}=this.props.store.getState();
+    const {list, favourites, showFavourites}=this.props.store.getState();    
 
-    if(this.state.showFavourite){
-      list=favourites;
-    }
+    const displayMovies=showFavourites? favourites: list;
 
     // returning the App component containing the Navbar component and the main container element
 
@@ -80,13 +78,13 @@ class App extends React.Component {
   
           <div id="list">
 
-            {list.length==0 && 
+            {displayMovies.length==0 && 
               <div id="no-favourites">
                   <span>No favourites</span>
               </div>
             }
   
-            {list.map((movie)=>{
+            {displayMovies.map((movie)=>{
             
               return (
                 <MovieCard
