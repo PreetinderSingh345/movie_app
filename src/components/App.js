@@ -56,7 +56,7 @@ class App extends React.Component {
     
     // getting the needed values from the state(via props) and setting which movies to show according to the tab selected
     
-    const {list, favourites, showFavourites}=this.props.store.getState();    
+    const {list, favourites, showFavourites}=this.props.store.getState().movies;    
 
     const displayMovies=showFavourites? favourites: list;
 
@@ -78,7 +78,7 @@ class App extends React.Component {
   
           <div id="list">
 
-            {displayMovies.length==0 && 
+            {displayMovies.length===0 && 
               <div id="no-favourites">
                   <span>No favourites</span>
               </div>

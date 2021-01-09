@@ -1,4 +1,4 @@
-// importing React, ReactDOM, createStore function, index styling, App component and the movies reducer
+// importing React, ReactDOM, createStore function, index styling, App component and the root reducer
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,11 +6,11 @@ import { createStore } from "redux";
 
 import './index.css';
 import App from './components/App';
-import movies from "./reducers/index";
+import rootReducer from "./reducers/index";
 
-// creating Redux store(passing to it the movies reducer)
+// creating Redux store(passing to it the root reducer)
 
-const store=createStore(movies);
+const store=createStore(rootReducer);
 
 // telling ReactDOM, to render the App component(passing it the store as props) as the root element
 

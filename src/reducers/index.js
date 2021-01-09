@@ -14,7 +14,7 @@ const initialMovieState={
 
 // defining and exporting the movies reducer function(consisting of the current state(initialized to initial movie state(default argument)) and the action as the arguments)
 
-export default function movies(state=initialMovieState, action){
+export function movies(state=initialMovieState, action){
 
     // matching the action type and returning the new state(we return the previous state as the default case)
 
@@ -52,7 +52,7 @@ export default function movies(state=initialMovieState, action){
             // removing the movie from the favourites array
 
             for(let i=0;i<favourites.length;i++){
-                if(favourites[i]==movie){
+                if(favourites[i]===movie){
                     
                     favourites.splice(i, 1);                                    
                     break;
@@ -82,6 +82,42 @@ export default function movies(state=initialMovieState, action){
 
         default: 
             return state;
+
+    }
+
+}
+
+// defining the initial search state object(consisting of a result property)
+
+const initialSearchState={
+    result: {}
+};
+
+// defining and exporting the search reducer function(consists of the state(set to initialSearchState(default argument)) and an action as the arguments)
+
+export function search(state=initialSearchState, action){
+    return state;
+}
+
+// defining the initial root state object(consists of the movies and search properties, which have values as the respective initial state objects defined for them above)
+
+const initialRootState={
+
+    movies: initialMovieState,
+    search: initialSearchState
+
+};
+
+// defining and exporting the root reducer function(consists of the state(default argument, initialized to the above state) and action as the arguments) and this is the default export in this file(we can have only one default export in a file)
+
+export default function rootReducer(state=initialRootState, action){
+
+    // returns the new state object after the changes have been made by the above reducers in the respective objects i.e. movies and search(the respective states have been passed to the below reducers, it will work even if we pass the complete state object as the needed properties will be filtered)
+
+    return {
+
+        movies: movies(state.movies, action),
+        search: search(state.search, action)
 
     }
 

@@ -36,7 +36,7 @@ class MovieCard extends React.Component{
 
         // showing the enlarged image when the count is even and removing the extra styles when the close button is clicked i.e. count is odd
 
-        if(this.countIcon%2==0){
+        if(this.countIcon%2===0){
 
             imageIcon.style.display="none";
             closeIcon.setAttribute("style", "display: inline-block; top: 5px; right: 5px;");
@@ -70,7 +70,7 @@ class MovieCard extends React.Component{
 
         // changing the button content and style if the the count is even and undoing the changes when the count is odd
 
-        if(this.countFav%2==0){
+        if(this.countFav%2===0){
 
             favouriteButton.innerText="Unfavourite";        
             favouriteButton.style.backgroundColor="rgb(255, 100, 100)";
@@ -95,7 +95,7 @@ class MovieCard extends React.Component{
 
         // adding/removing the movie to/from the favourites according to the count value
 
-        if(this.countFav%2==0){
+        if(this.countFav%2===0){
             store.dispatch(addFavourite(movie));
         }
         else{
@@ -152,13 +152,13 @@ class MovieCard extends React.Component{
 
                         <div className="movie-rating">IMDB {movie.imdbRating}</div>
 
-                        <button className="favourites-button" onClick={this.handleFavUnfavClick} id={`favourites-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}>Add to favourites</button>
+                        <button className="favourites-button" id={`favourites-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}>Add to favourites</button>
 
                         {/* showing the relevant button according to countFav value */}
 
-                        { this.countFav%2==0? 
+                        { this.countFav%2===0? 
                         
-                            <button className="favourites-icon-button fav-unfav-icon-button" onClick={this.handleFavUnfavClick} id={`favourites-icon-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}><FontAwesomeIcon icon={faHeart}/></button>
+                            <button className="favourites-icon-button fav-unfav-icon-button" id={`favourites-icon-button-${movie.imdbID}`} onClick={()=>this.handleFavUnfavClick(movie.imdbID)}><FontAwesomeIcon icon={faHeart}/></button>
 
                         : 
                         
