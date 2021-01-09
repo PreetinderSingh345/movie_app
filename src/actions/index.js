@@ -42,3 +42,29 @@ export const setShowFavourites=function(showFavourites){
 
     }
 }
+
+export const handleMovieSearch=function(searchText){
+
+    // getting the url at which the api call to get the searh result has to be made
+
+    const url=`http://www.omdbapi.com/?apikey=7381b178&t=${searchText}`;
+
+    // returning a function(not an object), whcih fetches the response, convertes it to json and then prints the movie obtained through the response
+
+    return function(dispatch){
+
+        fetch(url)
+        .then((response)=>{
+            return response.json();
+        })
+        .then((movie)=>{
+            
+            console.log("movie", movie);
+
+            // the action to add search result will be dispatched here(through the above dispatch argument)
+
+        });
+
+    }
+    
+}
