@@ -1,6 +1,15 @@
-// importing the ADD_MOVIES ,ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITES action types
+// importing the ADD_MOVIES ,ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITES action types and the combineReducer method
 
-import {ADD_MOVIES, ADD_FAVOURITE, REMOVE_FAVOURITE, SET_SHOW_FAVOURITES} from "../actions/index";
+import {
+
+    ADD_MOVIES, 
+    ADD_FAVOURITE, 
+    REMOVE_FAVOURITE, 
+    SET_SHOW_FAVOURITES
+
+} from "../actions/index";
+
+import {combineReducers} from "redux";
 
 // defining the initial movie state object(consisting of a list and favourites array and showFavourites value)
 
@@ -99,26 +108,11 @@ export function search(state=initialSearchState, action){
     return state;
 }
 
-// defining the initial root state object(consists of the movies and search properties, which have values as the respective initial state objects defined for them above)
+// defining and exporting the combine reducers function(takes an object of the combined state type and the reducers associated with each property, internal functioning is like the previously defined root reducer only and we can use the shortcut of writing only the property or value as both of them are having the same name)
 
-const initialRootState={
+export default combineReducers({
 
-    movies: initialMovieState,
-    search: initialSearchState
+    movies: movies,
+    search: search
 
-};
-
-// defining and exporting the root reducer function(consists of the state(default argument, initialized to the above state) and action as the arguments) and this is the default export in this file(we can have only one default export in a file)
-
-export default function rootReducer(state=initialRootState, action){
-
-    // returns the new state object after the changes have been made by the above reducers in the respective objects i.e. movies and search(the respective states have been passed to the below reducers, it will work even if we pass the complete state object as the needed properties will be filtered)
-
-    return {
-
-        movies: movies(state.movies, action),
-        search: search(state.search, action)
-
-    }
-
-}
+});
