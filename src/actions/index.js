@@ -4,6 +4,8 @@ export const ADD_MOVIES="ADD_MOVIES";
 export const ADD_FAVOURITE="ADD_FAVOURITE";
 export const REMOVE_FAVOURITE="REMOVE_FAVOURITE";  
 export const SET_SHOW_FAVOURITES="SET_SHOW_FAVOURITES";
+export const ADD_SEARCH_RESULT="ADD_SEARCH_RESULT";
+export const ADD_MOVIE_TO_LIST="ADD_MOVIE_TO_LIST";
 
 // defining and exporting the action creators(return the action object used as dispatch argument)
 
@@ -57,14 +59,28 @@ export const handleMovieSearch=function(searchText){
         .then((response)=>{
             return response.json();
         })
-        .then((movie)=>{
-            
-            console.log("movie", movie);
-
-            // the action to add search result will be dispatched here(through the above dispatch argument)
-
+        .then((movie)=>{            
+            dispatch(addMovieSearchResult(movie));
         });
 
     }
     
+}
+
+export const addMovieSearchResult=function(movie){
+    return {
+
+        type: ADD_SEARCH_RESULT,
+        movie: movie
+
+    }
+}
+
+export const addMovieToList=function(movie){
+    return {
+
+        type: ADD_MOVIE_TO_LIST, 
+        movie: movie
+
+    }
 }

@@ -16,10 +16,11 @@ body {
 
   height: 10vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: orange;
+  position: relative;
 
 }
 
@@ -73,6 +74,107 @@ body {
 
   display: none;
   font-size: 1.2rem;
+
+}
+
+#show-search-results{
+
+  position: absolute;
+  top: 10vh;  
+  width: 45%;
+  background-color: whitesmoke;  
+  padding: 10px;  
+  z-index: 1;
+  min-width: 270px;
+  border-radius: 0 0 20px 20px;
+  background-color: darkslategrey;
+  box-sizing: border-box;  
+  border: 0 solid whitesmoke;
+  border-width: 0 2px 2px 2px;
+
+}
+
+/* adjusting the show search results container according to the device width */
+
+@media only screen and (min-width: 400px){
+  body #show-search-results{
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 600px){
+  body #show-search-results{
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 800px){
+  body #show-search-results{
+    width: 45%;
+  }
+}
+
+/* search result */
+
+#search-result{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+
+}
+
+/* search image container */
+
+#search-img-container{
+
+  height: 150px;
+  width: 100px;
+  margin-right: 10px;
+  border-radius: 10px;
+
+}
+
+/* image inside the above container */
+
+#search-img-container img{
+
+  height: inherit;
+  width: inherit;  
+  border-radius: inherit;
+
+}
+
+/* search result, info and button container */
+
+#search-result-info-button{
+
+  width: 90%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;  
+  color: whitesmoke;
+  font-weight: bold;
+
+}
+
+/* add to movies button */
+
+#add-to-movies-button{
+
+  padding: 5px 10px;
+  border-radius: 20px;
+  width: 100px;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  color: darkslategrey;
+  background-color: lightgreen;
+  cursor: pointer;
 
 }
 
@@ -247,6 +349,8 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   padding-left: 10px;
+  max-height: 25px;
+  overflow-y: auto;
 
 }
 
@@ -287,18 +391,20 @@ body {
 
 }
 
-.movie-description::-webkit-scrollbar{
+/* thin scrollbar */
+
+.thin-scrollbar::-webkit-scrollbar{
 
   height: 4px;
   width: 4px;  
 
 }
 
-.movie-description::-webkit-scrollbar-track{
+.thin-scrollbar::-webkit-scrollbar-track{
   border-radius: 2px;
 }
 
-.movie-description::-webkit-scrollbar-thumb{
+.thin-scrollbar::-webkit-scrollbar-thumb{
   border-radius: 2px;
 }
 

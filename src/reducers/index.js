@@ -5,7 +5,9 @@ import {
     ADD_MOVIES, 
     ADD_FAVOURITE, 
     REMOVE_FAVOURITE, 
-    SET_SHOW_FAVOURITES
+    SET_SHOW_FAVOURITES,
+    ADD_SEARCH_RESULT,
+    ADD_MOVIE_TO_LIST
 
 } from "../actions/index";
 
@@ -89,6 +91,15 @@ export function movies(state=initialMovieState, action){
 
             }
 
+        case ADD_MOVIE_TO_LIST: 
+            
+            return {
+
+                ...state,
+                list: [action.movie, ...state.list]
+
+            }
+
         default: 
             return state;
 
@@ -99,13 +110,36 @@ export function movies(state=initialMovieState, action){
 // defining the initial search state object(consisting of a result property)
 
 const initialSearchState={
-    result: {}
+
+    result: {},
+    showSearchResults: false
+
 };
 
 // defining and exporting the search reducer function(consists of the state(set to initialSearchState(default argument)) and an action as the arguments)
 
 export function search(state=initialSearchState, action){
-    return state;
+    
+    switch(action.type){
+
+        case ADD_SEARCH_RESULT:
+
+            return {
+
+                ...state,
+                result: action.movie,
+                showSearchResults: true            
+
+            }
+
+        case ADD_MOVIE_TO_LIST: 
+            return initialSearchState;            
+
+        default: 
+            return state;
+
+    }
+
 }
 
 // defining and exporting the combine reducers function(takes an object of the combined state type and the reducers associated with each property, internal functioning is like the previously defined root reducer only and we can use the shortcut of writing only the property or value as both of them are having the same name)

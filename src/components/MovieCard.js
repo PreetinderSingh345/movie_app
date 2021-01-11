@@ -141,12 +141,12 @@ class MovieCard extends React.Component{
                 <div className="movie-description-container">
 
                     <div className="movie-title-genre-production">
-                        <div className="movie-title">{movie.Title}</div>
+                        <div className="movie-title thin-scrollbar">{movie.Title}</div>
                         <div className="movie-genre">{movie.Genre}</div>
                         <div className="movie-production">by {movie.Production}</div>
                     </div>                    
 
-                    <div className="movie-description">{movie.Plot}</div>
+                    <div className="movie-description thin-scrollbar">{movie.Plot}</div>
 
                     <div className="movie-rating-favourites">
 

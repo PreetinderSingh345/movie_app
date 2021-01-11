@@ -53,7 +53,7 @@ class App extends React.Component {
   }
 
   render(){
-    
+
     // getting the needed values from the state(via props) and setting which movies to show according to the tab selected
     
     const {list, favourites, showFavourites}=this.props.store.getState().movies;    

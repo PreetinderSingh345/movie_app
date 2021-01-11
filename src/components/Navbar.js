@@ -1,11 +1,11 @@
-// importing React , handleMovieSearch function and fontawesome icons
+// importing React , handleMovieSearch, addMovieToList function and fontawesome icons
 
 import React from "react";
 
-import {handleMovieSearch} from "../actions/index";
+import {handleMovieSearch, addMovieToList} from "../actions/index";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // defining and exporting the Navbar class
 
@@ -18,10 +18,7 @@ class Navbar extends React.Component{
         super(props);
 
         this.state={
-
-            searchText: "",
-            showSearchResults: false
-
+            searchText: ""            
         }
 
     }
@@ -47,10 +44,17 @@ class Navbar extends React.Component{
         const {searchText}=this.state;
 
         this.props.store.dispatch(handleMovieSearch(searchText));
+        
+    }
 
+    handleAddToList=(movie)=>{  
+        this.props.store.dispatch(addMovieToList(movie));
     }
 
     render(){
+
+        const {result: movie, showSearchResults}=this.props.store.getState().search;
+
         return (
 
             // navbar
@@ -70,9 +74,38 @@ class Navbar extends React.Component{
                         <FontAwesomeIcon icon={faSearch} id="search-icon"/>
                         <span id="search-content">Search</span>   
                         
-                    </button>
+                    </button>                    
 
                 </div>
+
+                {/* showing the search results when the search button is pressed and a button and its event listener(to add the movie to the list) are also added */}
+
+                {showSearchResults && 
+
+                    <div id="show-search-results">
+                        <div id="search-result">
+
+                            <div id="search-img-container">
+                                <img src={movie.Poster} alt="poster"/>
+                            </div>
+
+                            <div id="search-result-info-button">
+
+                                <span id="search-result-heading">{movie.Title}</span>
+
+                                <button id="add-to-movies-button" onClick={()=>this.handleAddToList(movie)}>
+                                    
+                                    <FontAwesomeIcon icon={faPlus}/>                                    
+                                    <span>to movies</span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
 
             </div>
 
