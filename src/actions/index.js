@@ -6,6 +6,7 @@ export const REMOVE_FAVOURITE="REMOVE_FAVOURITE";
 export const SET_SHOW_FAVOURITES="SET_SHOW_FAVOURITES";
 export const ADD_SEARCH_RESULT="ADD_SEARCH_RESULT";
 export const ADD_MOVIE_TO_LIST="ADD_MOVIE_TO_LIST";
+export const HIDE_SEARCH_RESULTS="HIDE_SEARCH_RESULTS";
 
 // defining and exporting the action creators(return the action object used as dispatch argument)
 
@@ -81,6 +82,14 @@ export const addMovieToList=function(movie){
 
         type: ADD_MOVIE_TO_LIST, 
         movie: movie
+
+    }
+}
+
+export const hideSearchResults=function(){
+    return {
+
+        type: HIDE_SEARCH_RESULTS    
 
     }
 }

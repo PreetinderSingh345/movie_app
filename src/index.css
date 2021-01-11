@@ -87,9 +87,9 @@ body {
   z-index: 1;
   min-width: 270px;
   border-radius: 0 0 20px 20px;
-  background-color: darkslategrey;
+  background-color: rgba(47, 79, 79, 0.5);
   box-sizing: border-box;  
-  border: 0 solid whitesmoke;
+  border: 0 solid darkslategrey;
   border-width: 0 2px 2px 2px;
 
 }
@@ -122,6 +122,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center; 
+  position: relative;
 
 }
 
@@ -174,6 +175,28 @@ body {
   justify-content: space-evenly;
   color: darkslategrey;
   background-color: lightgreen;
+  cursor: pointer;
+
+}
+
+/* no results */
+
+#no-results{
+
+  text-align: center;
+  color: whitesmoke;
+
+}
+
+/* close search */
+
+#close-search{
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  color: rgb(255, 100, 100);
   cursor: pointer;
 
 }

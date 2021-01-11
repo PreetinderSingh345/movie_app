@@ -7,7 +7,8 @@ import {
     REMOVE_FAVOURITE, 
     SET_SHOW_FAVOURITES,
     ADD_SEARCH_RESULT,
-    ADD_MOVIE_TO_LIST
+    ADD_MOVIE_TO_LIST,
+    HIDE_SEARCH_RESULTS
 
 } from "../actions/index";
 
@@ -134,6 +135,9 @@ export function search(state=initialSearchState, action){
 
         case ADD_MOVIE_TO_LIST: 
             return initialSearchState;            
+
+        case HIDE_SEARCH_RESULTS:
+            return initialSearchState;
 
         default: 
             return state;
