@@ -1,13 +1,14 @@
-// importing React , handleMovieSearch, addMovieToList function and fontawesome icons
+// importing React , handleMovieSearch, addMovieToList, hideSearchResults function, storeContext and fontawesome icons
 
 import React from "react";
 
 import {handleMovieSearch, addMovieToList, hideSearchResults} from "../actions/index";
+import {storeContext} from "../index";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-// defining and exporting the Navbar class
+// defining the Navbar class
 
 class Navbar extends React.Component{
 
@@ -140,4 +141,22 @@ class Navbar extends React.Component{
 
 }
 
-export default Navbar;
+// defining and exporting the NavbarWrapper class which uses the store context's Consumer component and provides the access of the store to the Navbar component i.e. wrapped inside this NavbarWrapper component
+
+class NavbarWrapper extends React.Component{
+    render(){
+        return(
+
+            <storeContext.Consumer>
+                {(store)=>(
+
+                    <Navbar store={store}/>
+
+                )}
+            </storeContext.Consumer>
+
+        )
+    }
+}
+
+export default NavbarWrapper;

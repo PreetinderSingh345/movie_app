@@ -1,6 +1,6 @@
 // importing React, ReactDOM, createStore and applyMiddleware function, thunk(middleware for handling actions which return a function), index styling, App component and the root reducer
 
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware } from "redux";
@@ -30,16 +30,40 @@ const logger=({dispatch, getState})=>(next)=>(action)=>{
 
 const store=createStore(rootReducer, applyMiddleware(logger, thunk));
 
+// defining and exporting storeContext(for sharing the store with the App component and all its descendants)
+
+export const storeContext=createContext();
+
+// defining the Provider class
+
+class Provider extends React.Component{
+  render(){
+
+    // getting the store value from the props and providing this value inside the Provide component rendered below
+
+    const {store}=this.props;
+
+    // returning the Provider component of the storeContext with value as the store(this store is provided to the Comsumer callback) including all the components inside it(to be rendered)
+
+    return (
+      <storeContext.Provider value={store}>
+        {this.props.children}
+      </storeContext.Provider>
+    );
+
+  }
+}
+
 // telling ReactDOM, to render the App component(passing it the store as props) as the root element
 
 ReactDOM.render(
 
-  <React.StrictMode>
-    <App 
-      store={store}
-    />
-  </React.StrictMode>,
+  // wrapping the App(so that the App and all its descendants get access to the store context provider value(store in our case)) inside the Provider component(passing to it the store as props)  
 
-  document.getElementById('root')
+  <Provider store={store}>          
+      <App/>          
+  </Provider>,        
+
+  document.getElementById("root")
 
 );

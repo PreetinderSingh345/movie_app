@@ -1,4 +1,4 @@
-// importing React, Navbar, MovieCard component, movies data, addMovies and setShowFavourites function
+// importing React, Navbar, MovieCard component, movies data, addMovies, setShowFavourites function and storeContext
 
 import React from "react";
 import Navbar from "./Navbar";
@@ -7,10 +7,11 @@ import MovieCard from "./MovieCard";
 import {data} from "../data";
 import {addMovies} from "../actions/index";
 import {setShowFavourites} from "../actions/index";
+import {storeContext} from "../index"; 
 
-// defining and exporting the App class
+// defining the App class
 
-class App extends React.Component {
+class App extends React.Component {  
 
   // component did mount function, to change the state(add movies) inside the store
   
@@ -52,7 +53,7 @@ class App extends React.Component {
 
   }
 
-  render(){
+  render(){    
 
     // getting the needed values from the state(via props) and setting which movies to show according to the tab selected
     
@@ -60,14 +61,12 @@ class App extends React.Component {
 
     const displayMovies=showFavourites? favourites: list;
 
-    // returning the App component containing the Navbar component and the main container element
+    // returning the App component containing the Navbar component and the main container element(wrapping the UI to be returned inside the callback function(taking store as the argument) expected by the Consumer component of the storeContext)
 
     return (
       <div className="App">
-       
-        <Navbar 
-          store={this.props.store}
-        />
+      
+        <Navbar/>        
   
         <div id="main-container">
   
@@ -104,11 +103,29 @@ class App extends React.Component {
   
         </div>      
   
-      </div>
-    );
+      </div>      
+    ); 
 
   }
 
 }
 
-export default App;
+// defining and exporting the AppWrapper class which uses the store context's Consumer component and provides the access of the store to the App component i.e. wrapped inside this AppWrapper component
+
+class AppWrapper extends React.Component{
+  render(){
+    return (
+
+      <storeContext.Consumer>
+        {(store)=>(
+
+          <App store={store}/>
+
+        )}
+      </storeContext.Consumer>
+
+    )
+  }
+}
+
+export default AppWrapper;
