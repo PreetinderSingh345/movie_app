@@ -1,8 +1,9 @@
-// importing React, addFavourite, removeFavourite function and fontawesome icons
+// importing React, addFavourite, removeFavourite, connect function and fontawesome icons
 
 import React from "react";
 import {addFavourite} from "../actions/index";
 import {removeFavourite} from "../actions/index";
+import {connect} from "../index";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartBroken, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -85,26 +86,16 @@ class MovieCard extends React.Component{
 
         // getting the movie and the store from props
 
-        const {movie, store}=this.props;
-
-        // subscribing to the store to listen to the changes(force updating inside it to cause a re-render) in the state after an action to add/remove a movie as favourite is dispatched below        
-
-        const unsubscribe=store.subscribe(()=>{
-            this.forceUpdate();
-        });                
+        const {movie}=this.props;
 
         // adding/removing the movie to/from the favourites according to the count value
 
         if(this.countFav%2===0){
-            store.dispatch(addFavourite(movie));
+            this.props.dispatch(addFavourite(movie));
         }
         else{
-            store.dispatch(removeFavourite(movie));
-        }          
-
-        // unsubscribing to the store to listen to the changes in the state as we're going to subscribe again when this event listener is called again(so that unmounted components are not updated)
-
-        unsubscribe();        
+            this.props.dispatch(removeFavourite(movie));
+        }   
 
         this.countFav++;
 
@@ -112,7 +103,7 @@ class MovieCard extends React.Component{
 
     render(){
 
-        // getting the movie object from props
+        // getting the movie from props
 
         const {movie}=this.props;
 
@@ -178,4 +169,14 @@ class MovieCard extends React.Component{
 
 }
 
-export default MovieCard;
+// defining the mapStateToProps function
+
+function mapStateToProps(state){
+    return {}
+}
+
+// defining and exporting the connected component
+
+const connectedComponent=connect(mapStateToProps)(MovieCard);
+
+export default connectedComponent;

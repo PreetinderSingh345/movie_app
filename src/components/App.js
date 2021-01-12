@@ -7,8 +7,7 @@ import MovieCard from "./MovieCard";
 import {data} from "../data";
 import {addMovies} from "../actions/index";
 import {setShowFavourites} from "../actions/index";
-// import {connect} from "../index";
-import {storeContext} from "../index";
+import {connect} from "../index";
 
 // defining the App class
 
@@ -19,12 +18,8 @@ class App extends React.Component {
   componentDidMount(){
 
     // dispatching an action to change the state inisde the store(the action object is returned via the addMovies function we're calling(for the movies data))
-    
-    this.props.store.subscribe(()=>{
-      this.forceUpdate();
-    });
 
-    this.props.store.dispatch(addMovies(data));
+    this.props.dispatch(addMovies(data));
 
   }
   
@@ -34,15 +29,15 @@ class App extends React.Component {
 
     // dispatching an action according to the showFavourites value and unsubscribing as we'll subscribe to the store again when this event listener is called again
 
-    this.props.store.dispatch(setShowFavourites(showFavourites));
+    this.props.dispatch(setShowFavourites(showFavourites));
 
   }
 
   render(){    
 
-    // getting the needed values from the state(via props) and setting which movies to show according to the tab selected
+    // getting the needed values from props
     
-    const {list, favourites, showFavourites}=this.props.store.getState().movies;    
+    const {list, favourites, showFavourites}=this.props.movies;    
 
     const displayMovies=showFavourites? favourites: list;
 
@@ -77,7 +72,6 @@ class App extends React.Component {
   
                   movie={movie}
                   key={movie.imdbID}
-                  store={this.props.store}
   
                 />
               );
@@ -97,29 +91,17 @@ class App extends React.Component {
 
 // defining the callback function which tells what data the connect function has to get from the store(we return an object containing movies and search properties with values taken from the root state object of redux)
 
-// function mapStateToProps(state){
-//   return {
+function mapStateToProps(state){
+  return {
 
-//     movies: state.movies,
-//     search: state.search
+    movies: state.movies,
+    search: state.search
 
-//   }
-// }
-
-// calling the connect function, providing to it the above callback(map state to props function), receiving the returned data as props for the App component, getting the returned component from the connect function inside connectedComponent and exporting it
-
-// const connectedComponent=connect(mapStateToProps)(App);
-
-class AppWrapper extends React.Component{
-  render(){
-    return (
-      <storeContext.Consumer>
-        {(store)=>(
-          <App store={store}/>
-        )}
-      </storeContext.Consumer>
-    );
   }
 }
 
-export default AppWrapper;
+// calling the connect function, providing to it the above callback(map state to props function), receiving the returned data as props for the App component, getting the returned component from the connect function inside connectedComponent and exporting it
+
+const connectedComponent=connect(mapStateToProps)(App);
+
+export default connectedComponent;

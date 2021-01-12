@@ -1,12 +1,13 @@
-// importing React , handleMovieSearch, addMovieToList, hideSearchResults function, storeContext and fontawesome icons
+// importing React , handleMovieSearch, addMovieToList, hideSearchResults, connect function and fontawesome icons
 
 import React from "react";
 
 import {handleMovieSearch, addMovieToList, hideSearchResults} from "../actions/index";
-import {storeContext} from "../index";
+import {connect} from "../index";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { search } from "../reducers";
 
 // defining the Navbar class
 
@@ -44,7 +45,7 @@ class Navbar extends React.Component{
 
         const {searchText}=this.state;
 
-        this.props.store.dispatch(handleMovieSearch(searchText));
+        this.props.dispatch(handleMovieSearch(searchText));
         
     }
 
@@ -54,7 +55,7 @@ class Navbar extends React.Component{
 
         // dispatching an action to add the selected movie to the list
 
-        this.props.store.dispatch(addMovieToList(movie));
+        this.props.dispatch(addMovieToList(movie));
 
     }
 
@@ -64,13 +65,15 @@ class Navbar extends React.Component{
 
         // dispatching an action to hide the search results
 
-        this.props.store.dispatch(hideSearchResults());
+        this.props.dispatch(hideSearchResults());
 
     }
 
     render(){
 
-        const {result: movie, showSearchResults}=this.props.store.getState().search;
+        // getting the needed values from props
+
+        const {result: movie, showSearchResults}=this.props.search;
 
         return (
 
@@ -141,22 +144,19 @@ class Navbar extends React.Component{
 
 }
 
-// defining and exporting the NavbarWrapper class which uses the store context's Consumer component and provides the access of the store to the Navbar component i.e. wrapped inside this NavbarWrapper component
 
-class NavbarWrapper extends React.Component{
-    render(){
-        return(
+// defining the mapStateToProps function
 
-            <storeContext.Consumer>
-                {(store)=>(
+function mapStateToProps(state){
+    return {
 
-                    <Navbar store={store}/>
+        search: search
 
-                )}
-            </storeContext.Consumer>
-
-        )
     }
 }
 
-export default NavbarWrapper;
+// defining and exporting the connected component
+
+const connectedComponent=connect(mapStateToProps)(Navbar);
+
+export default connectedComponent;
