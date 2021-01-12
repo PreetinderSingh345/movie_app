@@ -3,7 +3,7 @@
 import React from "react";
 import {addFavourite} from "../actions/index";
 import {removeFavourite} from "../actions/index";
-import {connect} from "../index";
+import {connect} from "react-redux";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartBroken, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";

@@ -7,7 +7,7 @@ import MovieCard from "./MovieCard";
 import {data} from "../data";
 import {addMovies} from "../actions/index";
 import {setShowFavourites} from "../actions/index";
-import {connect} from "../index";
+import {connect} from "react-redux";
 
 // defining the App class
 

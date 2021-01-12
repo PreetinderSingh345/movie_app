@@ -3,11 +3,10 @@
 import React from "react";
 
 import {handleMovieSearch, addMovieToList, hideSearchResults} from "../actions/index";
-import {connect} from "../index";
+import {connect} from "react-redux";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { search } from "../reducers";
 
 // defining the Navbar class
 
@@ -147,11 +146,9 @@ class Navbar extends React.Component{
 
 // defining the mapStateToProps function
 
-function mapStateToProps(state){
-    return {
-
-        search: search
-
+function mapStateToProps({search}){
+    return {        
+        search
     }
 }
 
