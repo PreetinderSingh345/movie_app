@@ -25,7 +25,31 @@ class App extends React.Component {
   
   // show fav unfav function which handles which tab to show according to the tab i.e. is clicked
 
-  showFavUnfav=(showFavourites)=>{
+  showFavUnfav=(event, showFavourites)=>{  
+
+    // highlighting the new tab i.e. selected and removing the highlighted styling from the previous tab
+
+    let element=event.target;
+    let tabName=element.getAttribute("id");
+    
+    let prevTab=null;
+    let nextTab=null;
+
+    if(tabName=="music-tab"){
+
+      prevTab=document.getElementById("favourites-tab");
+      nextTab=document.getElementById("music-tab");
+
+    }
+    else{
+
+      prevTab=document.getElementById("music-tab");
+      nextTab=document.getElementById("favourites-tab");
+
+    }
+
+    prevTab.classList.remove("tab-selected");
+    nextTab.classList.add("tab-selected");
 
     // dispatching an action according to the showFavourites value and unsubscribing as we'll subscribe to the store again when this event listener is called again
 
@@ -52,8 +76,8 @@ class App extends React.Component {
   
           <div id="tab-container">
             
-            <div className="tabs" id="music-tab" onClick={()=>this.showFavUnfav(false)}>Music</div>
-            <div className="tabs" id="favourites-tab" onClick={()=>this.showFavUnfav(true)}>Favourites</div>
+            <div className="tabs tab-selected" id="music-tab" onClick={(event)=>this.showFavUnfav(event, false)}>Music</div>
+            <div className="tabs" id="favourites-tab" onClick={(event)=>this.showFavUnfav(event, true)}>Favourites</div>
   
           </div>
   
